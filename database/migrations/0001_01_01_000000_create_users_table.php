@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('role_id')->default(2); // Default value set here
+            $table->enum('role', ['admin', 'user'])->default('user'); // Default value set here
             $table->rememberToken();
             $table->timestamps();
         });

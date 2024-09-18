@@ -37,4 +37,8 @@ class AdminController extends Controller
         // Admin dashboard page (admin.index)
         return view('admin.index');
     }
+    public function registerForm()
+    {
+        return view('admin.register');
+    }
 }

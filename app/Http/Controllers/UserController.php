@@ -17,6 +17,6 @@ class UserController extends Controller
     public function viewProducts()
     {
         $products = Product::all();
-        return view('products.index', compact('products'));
+        return view('user.view_products', compact('products'));
     }
 }
