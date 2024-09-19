@@ -23,12 +23,18 @@ class CreateAdmin extends Command
         $email = $this->ask('Enter the email of the admin');
         $password = $this->secret('Enter the password for the admin');
 
+        // Check if email already exists
+        if (User::where('email', $email)->exists()) {
+            $this->error('An account with this email already exists.');
+            return;
+        }
+
         // Create the admin user
         User::create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
-            'role_id' => 1, // Default role ID for admin
+            'role' => 'admin', // Assign 'admin' role
         ]);
 
         $this->info('Admin user created successfully!');

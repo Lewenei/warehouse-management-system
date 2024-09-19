@@ -29,7 +29,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/register', [AdminController::class, 'registerForm'])->name('admin.registerForm');
-    Route::post('/admin/register', [AdminController::class, 'register'])->name('admin.register');
+    Route::post('/admin/register', [AdminController::class, 'registerUser'])->name('admin.register');
     Route::resource('/products', ProductController::class);
     Route::resource('/locations', WarehouseLocationController::class);
 });

@@ -9,14 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function register(Request $request)
+    public function registerUser (Request $request)
     {
         // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-            'role_id' => 'required|exists:roles,id', // Role should exist in roles table
         ]);
 
         // Create the user
@@ -24,7 +23,7 @@ class AdminController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password), // Encrypt password
-            'role_id' => $request->role_id,
+            'role' => 'user', // Default role is 'user'
         ]);
 
         // Redirect back with a success message
