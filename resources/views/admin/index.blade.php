@@ -9,7 +9,7 @@
         <h1>Admin Dashboard</h1>
         <nav>
             <ul>
-                <li><a href="{{ route('admin.registerForm') }}">Register User</a></li>
+                <li><a href="{{ route('admin.viewUsers') }}">View Users</a></li>
                 <li><a href="{{ route('products.index') }}">Manage Products</a></li>
                 <li><a href="{{ route('locations.index') }}">Manage Locations</a></li>
             </ul>

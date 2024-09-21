@@ -28,10 +28,11 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 // Admin Routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/admin/register', [AdminController::class, 'registerForm'])->name('admin.registerForm');
-    Route::post('/admin/register', [AdminController::class, 'registerUser'])->name('admin.register');
+    Route::get('/admin/users', [AdminController::class, 'viewUsers'])->name('admin.viewUsers'); // New route for viewing users
     Route::resource('/products', ProductController::class);
     Route::resource('/locations', WarehouseLocationController::class);
+    Route::post('/admin/users/{id}/approve', [AdminController::class, 'approveUser'])->name('admin.approveUser');
+    Route::post('/admin/users/{id}/disapprove', [AdminController::class, 'disapproveUser'])->name('admin.disapproveUser');
 });
 
 // Profile Routes

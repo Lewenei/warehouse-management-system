@@ -40,4 +40,36 @@ class AdminController extends Controller
     {
         return view('admin.register');
     }
+
+    public function viewUsers()
+    {
+        // Retrieve all users, you can modify this query to paginate or filter based on your needs
+        $users = User::all();
+
+        return view('admin.users', compact('users')); // Pass the users data to the view
+    }
+
+    /**
+     * Approve a user.
+     */
+    public function approveUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->approved = true;  // Approve the user
+        $user->save();
+
+        return redirect()->route('admin.viewUsers')->with('success', 'User approved successfully!');
+    }
+
+    /**
+     * Disapprove a user.
+     */
+    public function disapproveUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->approved = false; // Disapprove the user
+        $user->save();
+
+        return redirect()->route('admin.viewUsers')->with('success', 'User disapproved successfully!');
+    }
 }
