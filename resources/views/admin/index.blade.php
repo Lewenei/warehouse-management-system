@@ -1,28 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-    <!-- Include your CSS files here -->
-</head>
-<body>
-    <header>
-        <h1>Admin Dashboard</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ route('admin.viewUsers') }}">View Users</a></li>
-                <li><a href="{{ route('products.index') }}">Manage Products</a></li>
-                <li><a href="{{ route('locations.index') }}">Manage Locations</a></li>
-            </ul>
-        </nav>
-    </header>
+@extends('layouts.app')
 
-    <main>
-        <!-- Main content for admin dashboard -->
-        @yield('content')
-    </main>
+@section('content')
+<div class="container">
+    <h1>Admin Dashboard</h1>
 
-    <footer>
-        <p>&copy; {{ date('Y') }} Your Company</p>
-    </footer>
-</body>
-</html>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Manage Products</h3>
+            <a href="{{ route('products.index') }}" class="btn btn-primary">View Products</a>
+            <a href="{{ route('products.create') }}" class="btn btn-success">Add Product</a>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Manage Product Types</h3>
+            <a href="{{ route('product-types.index') }}" class="btn btn-primary">View Product Types</a>
+            <a href="{{ route('product-types.create') }}" class="btn btn-success">Add Product Type</a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h3>Manage Warehouse Locations</h3>
+            <a href="{{ route('warehouse-locations.index') }}" class="btn btn-primary">View Warehouse Locations</a>
+            <a href="{{ route('warehouse-locations.create') }}" class="btn btn-success">Add Warehouse Location</a>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Manage Users</h3>
+            <a href="{{ route('admin.viewUsers') }}" class="btn btn-primary">View Users</a>
+           
+        </div>
+    </div>
+</div>
+@endsection

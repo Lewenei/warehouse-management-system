@@ -12,8 +12,9 @@ class ProductController extends Controller
     // Display a listing of products
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $products = Product::with('productType', 'warehouseLocation')->get();
+
+        return view('admin.products.index', compact('products'));
     }
 
     // Show the form for creating a new product
@@ -21,7 +22,7 @@ class ProductController extends Controller
     {
         $productTypes = ProductType::all();
         $locations = WarehouseLocation::all();
-        return view('products.create', compact('productTypes', 'locations'));
+        return view('admin.products.create', compact('productTypes', 'locations'));
     }
 
     // Store a newly created product in storage
@@ -37,7 +38,7 @@ class ProductController extends Controller
 
         Product::create($request->all());
 
-        return redirect()->route('products.index')->with('success', 'Product added successfully!');
+        return redirect()->route('admin.products.index')->with('success', 'Product added successfully!');
     }
 
     // Show the form for editing the specified product
@@ -61,7 +62,7 @@ class ProductController extends Controller
 
         $product->update($request->all());
 
-        return redirect()->route('products.index')->with('success', 'Product updated successfully!');
+        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
     }
 
     // Remove the specified product from storage
@@ -69,6 +70,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
+        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
     }
 }

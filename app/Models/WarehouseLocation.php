@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WarehouseLocation extends Model
 {
     use HasFactory;
+
+     // Add location_name to the fillable property
+     protected $fillable = ['location_name'];
 }

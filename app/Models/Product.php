@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->belongsTo(ProductType::class);
     }
+
+    public function warehouseLocation()
+    {
+        return $this->belongsTo(WarehouseLocation::class);
+    }
 }

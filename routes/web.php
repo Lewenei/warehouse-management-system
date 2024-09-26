@@ -3,10 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseLocationController;
+use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 
 // Home Route
 Route::get('/', function () {
@@ -33,6 +35,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/locations', WarehouseLocationController::class);
     Route::post('/admin/users/{id}/approve', [AdminController::class, 'approveUser'])->name('admin.approveUser');
     Route::post('/admin/users/{id}/disapprove', [AdminController::class, 'disapproveUser'])->name('admin.disapproveUser');
+
+    Route::resource('/products', ProductController::class);
+    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
+    Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
+
+    Route::resource('/product-types', ProductTypeController::class)->except(['show']);
+    Route::resource('/warehouse-locations', WarehouseLocationController::class)->except(['show']);
+
 });
 
 // Profile Routes
