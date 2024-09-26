@@ -13,9 +13,26 @@ class Product extends Model
         'name', 
         'description', 
         'quantity', 
-        'product_type_id', 
+        'price', 
+        'batch_number', 
+        'expiry_date', 
+        'user_id',
+        'product_type_id',
+        'supplier_id',
         'warehouse_location_id'
     ];
+
+    // Define the relationship with Supplier
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * A product belongs to a product type.

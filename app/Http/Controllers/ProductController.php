@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\WarehouseLocation;
 use Illuminate\Http\Request;
+use App\Models\Supplier;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -22,7 +24,9 @@ class ProductController extends Controller
     {
         $productTypes = ProductType::all();
         $locations = WarehouseLocation::all();
-        return view('admin.products.create', compact('productTypes', 'locations'));
+         // Fetch all suppliers
+         $suppliers = Supplier::all(); 
+        return view('admin.products.create', compact('productTypes', 'locations', 'suppliers'));
     }
 
     // Store a newly created product in storage
@@ -32,11 +36,27 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric',
+            'batch_number' => 'nullable|string',
+            'expiry_date' => 'nullable|date',
             'product_type_id' => 'required|exists:product_types,id',
             'warehouse_location_id' => 'required|exists:warehouse_locations,id',
+            'supplier_id' => 'required|exists:suppliers,id', // Validate supplier_id
         ]);
 
-        Product::create($request->all());
+        // Create the product and associate it with the logged-in user
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'batch_number' => $request->batch_number,
+            'expiry_date' => $request->expiry_date,
+            'product_type_id' => $request->product_type_id,
+            'warehouse_location_id' => $request->warehouse_location_id,
+            'user_id' => Auth::id(), // Add the authenticated user's ID
+            'supplier_id' => $request->supplier_id, // Add supplier ID
+        ]);
 
         return redirect()->route('admin.products.index')->with('success', 'Product added successfully!');
     }

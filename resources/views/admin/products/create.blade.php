@@ -33,6 +33,21 @@
             <input type="number" name="quantity" id="quantity" class="form-control" value="{{ old('quantity') }}" required>
         </div>
 
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" name="price" id="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="batch_number">Batch Number</label>
+            <input type="text" class="form-control" name="batch_number" id="batch_number">
+        </div>
+
+        <div class="form-group">
+            <label for="expiry_date">Expiry Date</label>
+            <input type="date" class="form-control" name="expiry_date" id="expiry_date">
+        </div>
+
         <div class="mb-3">
             <label for="product_type_id" class="form-label">Product Type</label>
             <select name="product_type_id" id="product_type_id" class="form-control" required>
@@ -50,6 +65,17 @@
                 @endforeach
             </select>
         </div>
+
+        <div class="form-group">
+            <label for="supplier_id">Supplier</label>
+            <select name="supplier_id" id="supplier_id" class="form-control" required>
+                <option value="">Select a supplier</option>
+                @foreach($suppliers as $supplier)
+                <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
