@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseLocationController;
 use App\Http\Controllers\ProductTypeController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +44,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('/product-types', ProductTypeController::class)->except(['show']);
     Route::resource('/warehouse-locations', WarehouseLocationController::class)->except(['show']);
+
+    Route::resource('suppliers', SupplierController::class);
 
 });
 

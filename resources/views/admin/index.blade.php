@@ -30,6 +30,12 @@
             <a href="{{ route('admin.viewUsers') }}" class="btn btn-primary">View Users</a>
            
         </div>
+
+        <div class="col-md-6">
+            <h3>Manage Suppliers</h3>
+            <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">View Suppliers</a>
+           
+        </div>
     </div>
 </div>
 @endsection
