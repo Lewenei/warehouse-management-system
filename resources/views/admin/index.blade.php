@@ -1,41 +1,77 @@
-@extends('layouts.app')
+@extends('layouts.admin-layout')
 
-@section('content')
-<div class="container">
-    <h1>Admin Dashboard</h1>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Manage Products</h3>
-            <a href="{{ route('products.index') }}" class="btn btn-primary">View Products</a>
-            <a href="{{ route('products.create') }}" class="btn btn-success">Add Product</a>
-        </div>
+<main id="main" class="main">
 
-        <div class="col-md-6">
-            <h3>Manage Product Types</h3>
-            <a href="{{ route('product-types.index') }}" class="btn btn-primary">View Product Types</a>
-            <a href="{{ route('product-types.create') }}" class="btn btn-success">Add Product Type</a>
-        </div>
-    </div>
+    <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <h3>Manage Warehouse Locations</h3>
-            <a href="{{ route('warehouse-locations.index') }}" class="btn btn-primary">View Warehouse Locations</a>
-            <a href="{{ route('warehouse-locations.create') }}" class="btn btn-success">Add Warehouse Location</a>
-        </div>
+    <section class="section dashboard">
+        <div class="row">
 
-        <div class="col-md-6">
-            <h3>Manage Users</h3>
-            <a href="{{ route('admin.viewUsers') }}" class="btn btn-primary">View Users</a>
-           
-        </div>
+            <!-- Left side columns -->
+            <div class="col-lg-8">
+                <div class="row">
 
-        <div class="col-md-6">
-            <h3>Manage Suppliers</h3>
-            <a href="{{ route('suppliers.index') }}" class="btn btn-secondary">View Suppliers</a>
-           
-        </div>
-    </div>
-</div>
-@endsection
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
+
+
+                            <div class="card-body">
+                                <h5 class="card-title">Registered Products</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>145</h6>
+                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Sales Card -->
+
+                    <!-- Revenue Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+
+
+
+                            <div class="card-body">
+                                <h5 class="card-title">All Users</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-currency-dollar"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>$3,264</h6>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Revenue Card -->
+
+
+
+                </div><!-- End Right side columns -->
+
+            </div>
+    </section>
+
+</main><!-- End #main -->
