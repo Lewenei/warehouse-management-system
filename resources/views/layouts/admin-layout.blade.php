@@ -38,7 +38,51 @@
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
+
+
+        <nav class="header-nav ms-auto">
+
+            <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+                </a><!-- End Profile Image Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>{{ Auth::user()->name }}</h6>
+                        <span>{{ Auth::user()->role }}</span> <!-- Adjust role or title as needed -->
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="dropdown-item d-flex align-items-center">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </nav><!-- End Icons Navigation -->
+
+
     </header><!-- End Header -->
+
 
     @include('admin.partials.sidebar')
 
@@ -57,7 +101,7 @@
 
     <script>
         // Toggle sidebar functionality
-        document.querySelector('.toggle-sidebar-btn').addEventListener('click', function () {
+        document.querySelector('.toggle-sidebar-btn').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('toggle');
         });
     </script>
