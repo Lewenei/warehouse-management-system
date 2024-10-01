@@ -42,6 +42,9 @@ return new class extends Migration
                 ->constrained('users')
                 ->onDelete('cascade');
 
+            $table->string('image')->nullable(); // Add this to store the image path
+
+
             // Timestamps for record creation and update
             $table->timestamps();
         });

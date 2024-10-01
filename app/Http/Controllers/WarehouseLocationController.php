@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WarehouseLocation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WarehouseLocationController extends Controller
 {
@@ -11,7 +12,12 @@ class WarehouseLocationController extends Controller
     public function index()
     {
         $locations = WarehouseLocation::all();
-        return view('admin.warehouse-locations.index', compact('locations'));
+        // Return different views based on the user role
+        if (Auth::user()->role == 'admin') {
+            return view('admin.warehouse-locations.index', compact('locations'));
+        } else {
+            return view('user.warehouse-locations.index', compact('locations')); // Change this to user view
+        }
     }
 
     // Show the form for creating a new warehouse location

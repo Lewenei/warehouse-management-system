@@ -1,4 +1,4 @@
-@extends('layouts.admin-layout')
+@extends('layouts.user-layout')
 
 
 <main id="main" class="main">
@@ -7,7 +7,7 @@
         <h1>Products Registration</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Home</a></li>
                 <li class="breadcrumb-item active">Products</li>
             </ol>
         </nav>
@@ -34,7 +34,7 @@
                             @endif
 
                             <!-- Product Creation Form -->
-                            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('user.products.store') }}" method="POST">
                                 @csrf
 
                                 <div class="row mb-3">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
@@ -12,8 +13,15 @@ class SupplierController extends Controller
      */
     public function index()
     {
+
         $suppliers = Supplier::all();
-        return view('admin.suppliers.index', compact('suppliers'));
+
+        // Return different views based on the user role
+        if (Auth::user()->role == 'admin') {
+            return view('admin.suppliers.index', compact('suppliers'));
+        } else {
+            return view('user.suppliers.index', compact('suppliers')); // Change this to user view
+        }
     }
 
     /**

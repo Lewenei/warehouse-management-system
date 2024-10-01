@@ -19,7 +19,8 @@ class Product extends Model
         'user_id',
         'product_type_id',
         'supplier_id',
-        'warehouse_location_id'
+        'warehouse_location_id',
+        'image', // Add image to fillable
     ];
 
     // Define the relationship with Supplier

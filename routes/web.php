@@ -24,8 +24,16 @@ Route::get('/dashboard', function () {
 // User Routes
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::get('/user/products', [UserController::class, 'viewProducts'])->name('user.viewProducts');
+    Route::get('/user/products', [ProductController::class, 'index'])->name('user.products');
+    Route::get('/user/products/create', [ProductController::class, 'create'])->name('user.products.create'); // Allow users to view the create form
+    Route::post('/user/products', [ProductController::class, 'store'])->name('user.products.store'); // Allow users to store products
     Route::post('/user/order', [OrderController::class, 'store'])->name('order.store');
+
+
+    // Suppliers and Locations for users
+    Route::get('/user/suppliers', [SupplierController::class, 'index'])->name('user.suppliers'); // Define user suppliers route
+    Route::get('/user/warehouse-locations', [WarehouseLocationController::class, 'index'])->name('user.locations'); // Define user locations route
+
 });
 
 // Admin Routes

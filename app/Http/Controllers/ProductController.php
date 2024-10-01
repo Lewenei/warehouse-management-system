@@ -16,7 +16,12 @@ class ProductController extends Controller
     {
         $products = Product::with('productType', 'warehouseLocation')->get();
 
-        return view('admin.products.index', compact('products'));
+        // Return different views based on the user role
+        if (Auth::user()->role == 'admin') {
+            return view('admin.products.index', compact('products'));
+        } else {
+            return view('user.products.index', compact('products')); // Change this to user view
+        }
     }
 
     // Show the form for creating a new product
@@ -24,9 +29,14 @@ class ProductController extends Controller
     {
         $productTypes = ProductType::all();
         $locations = WarehouseLocation::all();
-         // Fetch all suppliers
-         $suppliers = Supplier::all(); 
-        return view('admin.products.create', compact('productTypes', 'locations', 'suppliers'));
+        $suppliers = Supplier::all();
+
+        // Check if the user is an admin or a regular user and serve the correct view
+        if (Auth::user()->role == 'admin') {
+            return view('admin.products.create', compact('productTypes', 'locations', 'suppliers'));
+        } else {
+            return view('user.products.create', compact('productTypes', 'locations', 'suppliers')); // Users see their own view
+        }
     }
 
     // Store a newly created product in storage
@@ -41,8 +51,14 @@ class ProductController extends Controller
             'expiry_date' => 'nullable|date',
             'product_type_id' => 'required|exists:product_types,id',
             'warehouse_location_id' => 'required|exists:warehouse_locations,id',
-            'supplier_id' => 'required|exists:suppliers,id', // Validate supplier_id
+            'supplier_id' => 'required|exists:suppliers,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' // Validate the image
         ]);
+
+        // Handle image upload
+        $imageName = time().'.'.$request->image->extension();  
+           
+        $request->image->move(public_path('images/products'), $imageName); // Move the image to the public folder
 
         // Create the product and associate it with the logged-in user
         Product::create([
@@ -55,10 +71,16 @@ class ProductController extends Controller
             'product_type_id' => $request->product_type_id,
             'warehouse_location_id' => $request->warehouse_location_id,
             'user_id' => Auth::id(), // Add the authenticated user's ID
-            'supplier_id' => $request->supplier_id, // Add supplier ID
+            'supplier_id' => $request->supplier_id,
+            'image' => $imageName, // Save the image name or null
         ]);
 
-        return redirect()->route('admin.products.index')->with('success', 'Product added successfully!');
+        // Redirect based on role
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('admin.products.index')->with('success', 'Product added successfully!');
+        } else {
+            return redirect()->route('user.products.index')->with('success', 'Product added successfully!');
+        }
     }
 
     // Show the form for editing the specified product
@@ -66,7 +88,13 @@ class ProductController extends Controller
     {
         $productTypes = ProductType::all();
         $locations = WarehouseLocation::all();
-        return view('products.edit', compact('product', 'productTypes', 'locations'));
+
+        // Return different views based on the user role
+        if (Auth::user()->role == 'admin') {
+            return view('admin.products.edit', compact('product', 'productTypes', 'locations'));
+        } else {
+            return view('user.products.edit', compact('product', 'productTypes', 'locations'));
+        }
     }
 
     // Update the specified product in storage
@@ -82,7 +110,12 @@ class ProductController extends Controller
 
         $product->update($request->all());
 
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
+        // Redirect based on role
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('admin.products.index')->with('success', 'Product updated successfully!');
+        } else {
+            return redirect()->route('user.products')->with('success', 'Product updated successfully!');
+        }
     }
 
     // Remove the specified product from storage
@@ -90,6 +123,11 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
+        // Redirect based on role
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
+        } else {
+            return redirect()->route('user.products')->with('success', 'Product deleted successfully!');
+        }
     }
 }
