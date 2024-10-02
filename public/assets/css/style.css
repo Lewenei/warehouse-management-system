@@ -15,7 +15,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #d6d60a;
+  background: #f6f9ff;
   color: #444444;
 }
 
@@ -236,7 +236,7 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #697001;
+  color: #012970;
   font-family: "Poppins", sans-serif;
 }
 
@@ -610,7 +610,7 @@ h6 {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #d82f2f;
+  background-color: #fff;
 }
 
 @media (max-width: 1199px) {
