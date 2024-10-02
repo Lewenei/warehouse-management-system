@@ -20,45 +20,58 @@
                     <div class="card-body">
                         <h5 class="card-title">Products Data</h5>
                         <p>
-                            Manage your products effectively using the table below. 
+                            Manage your products effectively using the table below.
                         </p>
                         <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add New Product</a>
                         <!-- Success Message -->
                         @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
                         @endif
 
                         <!-- Check if there are products -->
                         @if($products->isEmpty())
-                            <div class="alert alert-warning">
-                                No products found. Please add a product using the button above.
-                            </div>
+                        <div class="alert alert-warning">
+                            No products found. Please add a product using the button above.
+                        </div>
                         @else
-                            <!-- Table with stripped rows -->
-                            <table class="table datatable">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Quantity</th>
-                                        <th>Product Type</th>
-                                        <th>Warehouse Location</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($products as $product)
-                                        <tr>
-                                            <td>{{ $product->name }}</td>
-                                            <td>{{ $product->description }}</td>
-                                            <td>{{ $product->quantity }}</td>
-                                            <td>{{ $product->productType->name }}</td>
-                                            <td>{{ $product->warehouseLocation->name }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Product Type</th>
+                                    <th>Warehouse Location</th>
+                                    <th>Actions</th> <!-- Add Actions column -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($products as $product)
+                                <tr>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->quantity }}</td>
+                                    <td>{{ $product->productType->name }}</td>
+                                    <td> {{ $product->warehouseLocation->location_name }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-info">View</a>
+                                        <!-- Edit Button -->
+                                        <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                        <!-- Delete Button -->
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                         @endif
                     </div>
                 </div><!-- End Card -->
@@ -68,4 +81,3 @@
     </section>
 
 </main><!-- End #main -->
-

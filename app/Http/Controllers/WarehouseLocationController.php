@@ -40,31 +40,29 @@ class WarehouseLocationController extends Controller
         return redirect()->route('warehouse-locations.index')->with('success', 'Warehouse Location created successfully!');
     }
 
-    // Show the form for editing a warehouse location
-    public function edit(WarehouseLocation $warehouseLocation)
+    // Show the form for editing the specified warehouse location
+    public function edit(WarehouseLocation $location)
     {
-        return view('admin.warehouse-locations.edit', compact('warehouseLocation'));
+        return view('admin.warehouse-locations.edit', compact('location'));
     }
 
-    // Update the warehouse location
-    public function update(Request $request, WarehouseLocation $warehouseLocation)
+    // Update the specified warehouse location in storage
+    public function update(Request $request, WarehouseLocation $location)
     {
         $request->validate([
             'location_name' => 'required|string|max:255',
         ]);
 
-        $warehouseLocation->update([
-            'location_name' => $request->location_name,
-        ]);
+        $location->update($request->all());
 
-        return redirect()->route('warehouse-locations.index')->with('success', 'Warehouse Location updated successfully!');
+        return redirect()->route('warehouse-locations.index')->with('success', 'Warehouse location updated successfully!');
     }
 
-    // Delete a warehouse location
-    public function destroy(WarehouseLocation $warehouseLocation)
+    // Remove the specified warehouse location from storage
+    public function destroy(WarehouseLocation $location)
     {
-        $warehouseLocation->delete();
+        $location->delete();
 
-        return redirect()->route('warehouse-locations.index')->with('success', 'Warehouse Location deleted successfully!');
+        return redirect()->route('warehouse-locations.index')->with('success', 'Warehouse location deleted successfully!');
     }
 }

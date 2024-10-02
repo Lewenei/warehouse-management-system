@@ -8,6 +8,7 @@ use App\Models\WarehouseLocation;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -56,8 +57,8 @@ class ProductController extends Controller
         ]);
 
         // Handle image upload
-        $imageName = time().'.'.$request->image->extension();  
-           
+        $imageName = time() . '.' . $request->image->extension();
+
         $request->image->move(public_path('images/products'), $imageName); // Move the image to the public folder
 
         // Create the product and associate it with the logged-in user
@@ -88,12 +89,13 @@ class ProductController extends Controller
     {
         $productTypes = ProductType::all();
         $locations = WarehouseLocation::all();
+        $suppliers = Supplier::all(); // Fetch the suppliers
 
         // Return different views based on the user role
         if (Auth::user()->role == 'admin') {
-            return view('admin.products.edit', compact('product', 'productTypes', 'locations'));
+            return view('admin.products.edit', compact('product', 'productTypes', 'locations', 'suppliers'));
         } else {
-            return view('user.products.edit', compact('product', 'productTypes', 'locations'));
+            return view('user.products.edit', compact('product', 'productTypes', 'locations', 'suppliers'));
         }
     }
 
@@ -104,11 +106,41 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric',
+            'batch_number' => 'nullable|string',
+            'expiry_date' => 'nullable|date',
             'product_type_id' => 'required|exists:product_types,id',
             'warehouse_location_id' => 'required|exists:warehouse_locations,id',
+            'supplier_id' => 'required|exists:suppliers,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation for image
         ]);
 
-        $product->update($request->all());
+        $product->update($request->only([
+            'name',
+            'description',
+            'quantity',
+            'price',
+            'batch_number',
+            'expiry_date',
+            'product_type_id',
+            'warehouse_location_id',
+            'supplier_id'
+        ]));
+
+
+        // Handle image upload if a new image is present
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($product->image) {
+                Storage::disk('public')->delete('images/products/' . $product->image);
+            }
+            // Store the new image
+            $imagePath = $request->file('image')->store('images/products', 'public');
+            $product->image = $imagePath; // Update the image path
+        }
+
+        // Save the product
+        $product->save();
 
         // Redirect based on role
         if (Auth::user()->role == 'admin') {
@@ -121,6 +153,10 @@ class ProductController extends Controller
     // Remove the specified product from storage
     public function destroy(Product $product)
     {
+        // Optionally, delete the image file from storage if it exists
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
         $product->delete();
 
         // Redirect based on role
@@ -128,6 +164,18 @@ class ProductController extends Controller
             return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
         } else {
             return redirect()->route('user.products')->with('success', 'Product deleted successfully!');
+        }
+    }
+
+
+    // Show the specified product
+    public function show(Product $product)
+    {
+        // Return the view for displaying product details
+        if (Auth::user()->role == 'admin') {
+            return view('admin.products.show', compact('product'));
+        } else {
+            return view('user.products.show', compact('product')); // Adjust for user role if needed
         }
     }
 }

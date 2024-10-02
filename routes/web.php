@@ -40,7 +40,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/users', [AdminController::class, 'viewUsers'])->name('admin.viewUsers'); // New route for viewing users
-    Route::resource('/products', ProductController::class);
     Route::resource('/locations', WarehouseLocationController::class);
     Route::post('/admin/users/{id}/approve', [AdminController::class, 'approveUser'])->name('admin.approveUser');
     Route::post('/admin/users/{id}/disapprove', [AdminController::class, 'disapproveUser'])->name('admin.disapproveUser');
@@ -49,12 +48,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::put('admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+    // View a specific product
+    Route::get('/admin/products/{product}', [ProductController::class, 'show'])->name('admin.products.show');
+
+
 
     Route::resource('/product-types', ProductTypeController::class)->except(['show']);
-    Route::resource('/warehouse-locations', WarehouseLocationController::class)->except(['show']);
+    Route::resource('warehouse-locations', WarehouseLocationController::class);
 
     Route::resource('suppliers', SupplierController::class);
-
 });
 
 // Profile Routes
@@ -65,4 +68,4 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 });
 
 // Authentication Routes
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
