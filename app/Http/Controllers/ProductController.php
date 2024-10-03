@@ -56,10 +56,12 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' // Validate the image
         ]);
 
-        // Handle image upload
-        $imageName = time() . '.' . $request->image->extension();
-
-        $request->image->move(public_path('images/products'), $imageName); // Move the image to the public folder
+        // Handle the image upload using the `Storage` facade
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images/products', 'public'); // Save image to storage
+        } else {
+            $imagePath = null; // No image uploaded
+        }
 
         // Create the product and associate it with the logged-in user
         Product::create([
@@ -73,7 +75,7 @@ class ProductController extends Controller
             'warehouse_location_id' => $request->warehouse_location_id,
             'user_id' => Auth::id(), // Add the authenticated user's ID
             'supplier_id' => $request->supplier_id,
-            'image' => $imageName, // Save the image name or null
+            'image' => $imagePath, // Save the image name or null
         ]);
 
         // Redirect based on role
