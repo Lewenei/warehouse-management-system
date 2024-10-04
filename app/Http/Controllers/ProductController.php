@@ -82,7 +82,7 @@ class ProductController extends Controller
         if (Auth::user()->role == 'admin') {
             return redirect()->route('admin.products.index')->with('success', 'Product added successfully!');
         } else {
-            return redirect()->route('user.products.index')->with('success', 'Product added successfully!');
+            return redirect()->route('user.products')->with('success', 'Product added successfully!');
         }
     }
 
@@ -178,6 +178,21 @@ class ProductController extends Controller
             return view('admin.products.show', compact('product'));
         } else {
             return view('user.products.show', compact('product')); // Adjust for user role if needed
+        }
+    }
+
+
+    // Products by Warehouse
+    public function getProductsByWarehouse(WarehouseLocation $warehouse)
+    {
+        // Fetch products for the specified warehouse location
+        $products = Product::where('warehouse_location_id', $warehouse->id)->get();
+
+        // Check user role and return the appropriate view
+        if (Auth::user()->role == 'admin') {
+            return view('admin.products.by-warehouse', compact('products', 'warehouse'));
+        } else {
+            return view('user.products.by-warehouse', compact('products', 'warehouse')); // User view
         }
     }
 }

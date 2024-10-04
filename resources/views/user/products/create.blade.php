@@ -34,7 +34,7 @@
                             @endif
 
                             <!-- Product Creation Form -->
-                            <form action="{{ route('user.products.store') }}" method="POST">
+                            <form action="{{ route('user.products.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row mb-3">

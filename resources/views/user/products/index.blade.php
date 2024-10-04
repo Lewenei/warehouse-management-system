@@ -45,6 +45,7 @@
                                     <th>Quantity</th>
                                     <th>Product Type</th>
                                     <th>Warehouse Location</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,7 +55,13 @@
                                     <td>{{ $product->description }}</td>
                                     <td>{{ $product->quantity }}</td>
                                     <td>{{ $product->productType->name }}</td>
-                                    <td>{{ $product->warehouseLocation->name }}</td>
+                                    <td>{{ $product->warehouseLocation->location_name }}</td>
+                                    <td>
+                                        
+                                    <a href="{{ route('user.products.edit', $product) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <!-- View Product Button -->
+                                    <a href="{{ route('user.products.show', $product->id) }}" class="btn btn-sm btn-info">View</a>
+                                </td>
                                 </tr>
                                 @endforeach
                             </tbody>

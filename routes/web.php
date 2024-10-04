@@ -26,7 +26,14 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/products', [ProductController::class, 'index'])->name('user.products');
     Route::get('/user/products/create', [ProductController::class, 'create'])->name('user.products.create'); // Allow users to view the create form
+    Route::get('/user/{product}/edit', [ProductController::class, 'edit'])->name('user.products.edit');
+    Route::put('/user/{product}', [ProductController::class, 'update'])->name('user.products.update');
+    Route::get('/user/products/{product}', [ProductController::class, 'show'])->name('user.products.show');
     Route::post('/user/products', [ProductController::class, 'store'])->name('user.products.store'); // Allow users to store products
+
+    Route::get('user/warehouse-locations/{warehouse}/products', [ProductController::class, 'getProductsByWarehouse'])->name('user.products.byWarehouse');
+
+
     Route::post('/user/order', [OrderController::class, 'store'])->name('order.store');
 
 
@@ -51,6 +58,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
     // View a specific product
     Route::get('/admin/products/{product}', [ProductController::class, 'show'])->name('admin.products.show');
+
+    Route::get('admin/warehouse/{warehouse}/products', [ProductController::class, 'getProductsByWarehouse'])->name('admin.products.byWarehouse');
 
 
 

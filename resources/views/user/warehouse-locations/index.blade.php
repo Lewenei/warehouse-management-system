@@ -34,12 +34,16 @@
                             <thead>
                                 <tr>
                                     <th>Location Name</th>
+                                    <th>Actions</th> <!-- New Actions Column -->
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($locations as $location)
                                 <tr>
                                     <td>{{ $location->location_name }}</td>
+                                    <td>
+                                        <a href="{{ route('user.products.byWarehouse', $location->id) }}" class="btn btn-sm btn-info">View Products</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
