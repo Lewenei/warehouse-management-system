@@ -27,5 +27,12 @@
                 <span>Warehouse Locations</span>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.sales.index') }}">
+                <i class="bi bi-bag"></i> <!-- Sales icon -->
+                <span>Sales</span>
+            </a>
+        </li>
     </ul>
 </aside>

@@ -79,6 +79,14 @@
             </a>
         </li>
 
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.sales.index') }}">
+                <i class="bi bi-bag"></i> <!-- Sales icon -->
+                <span>Sales</span>
+            </a>
+        </li>
+
         <!-- Add other links similarly -->
     </ul>
 </aside>

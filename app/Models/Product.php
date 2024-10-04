@@ -10,12 +10,12 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
-        'description', 
-        'quantity', 
-        'price', 
-        'batch_number', 
-        'expiry_date', 
+        'name',
+        'description',
+        'quantity',
+        'price',
+        'batch_number',
+        'expiry_date',
         'user_id',
         'product_type_id',
         'supplier_id',
@@ -29,7 +29,7 @@ class Product extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -46,5 +46,10 @@ class Product extends Model
     public function warehouseLocation()
     {
         return $this->belongsTo(WarehouseLocation::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
     }
 }

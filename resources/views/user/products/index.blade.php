@@ -61,6 +61,7 @@
                                     <a href="{{ route('user.products.edit', $product) }}" class="btn btn-sm btn-warning">Edit</a>
                                     <!-- View Product Button -->
                                     <a href="{{ route('user.products.show', $product->id) }}" class="btn btn-sm btn-info">View</a>
+                                    <a href="{{ route('user.sales.create', $product->id) }}" class="btn btn-sm btn-primary">Outgoing Goods</a>
                                 </td>
                                 </tr>
                                 @endforeach

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WarehouseLocationController;
 use App\Http\Controllers\ProductTypeController;
@@ -41,6 +42,15 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/suppliers', [SupplierController::class, 'index'])->name('user.suppliers'); // Define user suppliers route
     Route::get('/user/warehouse-locations', [WarehouseLocationController::class, 'index'])->name('user.locations'); // Define user locations route
 
+    //Sales
+    Route::get('user/products/{product}/sell', [SalesController::class, 'create'])->name('user.sales.create');
+    Route::post('user/sales', [SalesController::class, 'store'])->name('user.sales.store');
+
+    // User's past sales
+    Route::get('user/sales', [SalesController::class, 'index'])->name('user.sales.index');
+
+
+    Route::get('user/sales/history', [SalesController::class, 'index'])->name('user.sales.history');
 });
 
 // Admin Routes
@@ -67,6 +77,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('warehouse-locations', WarehouseLocationController::class);
 
     Route::resource('suppliers', SupplierController::class);
+
+    Route::get('admin/sales', [SalesController::class, 'adminIndex'])->name('admin.sales.index');
 });
 
 // Profile Routes

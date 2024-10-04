@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('user_id');
+            $table->integer('quantity'); // Quantity sold
+            $table->string('customer_name');
+            $table->string('customer_email');
+            $table->string('customer_phone');
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');  
         });
     }
 
