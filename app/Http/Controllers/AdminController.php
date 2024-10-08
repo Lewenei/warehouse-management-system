@@ -6,10 +6,11 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Product;
 
 class AdminController extends Controller
 {
-    public function registerUser (Request $request)
+    public function registerUser(Request $request)
     {
         // Validate the request data
         $request->validate([
@@ -34,7 +35,13 @@ class AdminController extends Controller
     public function index()
     {
         // Admin dashboard page (admin.index)
-        return view('admin.index');
+
+        // Fetch the total count of products and users
+        $totalProducts = Product::count();
+        $totalUsers = User::count();
+
+        
+        return view('admin.index', compact('totalProducts', 'totalUsers'));
     }
     public function registerForm()
     {
@@ -71,5 +78,10 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->route('admin.viewUsers')->with('success', 'User disapproved successfully!');
+    }
+
+    public function showReports()
+    {
+        return view('admin.reports'); // Assuming your view is located at resources/views/admin/reports.blade.php
     }
 }

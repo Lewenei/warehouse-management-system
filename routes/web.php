@@ -10,6 +10,14 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportsController;
+
+//Export Routes
+use App\Exports\UsersExport;
+use App\Exports\ProductsExport;
+use App\Exports\SuppliersExport;
+use App\Exports\SalesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 // Home Route
@@ -33,9 +41,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('/user/products', [ProductController::class, 'store'])->name('user.products.store'); // Allow users to store products
 
     Route::get('user/warehouse-locations/{warehouse}/products', [ProductController::class, 'getProductsByWarehouse'])->name('user.products.byWarehouse');
-
-
-    Route::post('/user/order', [OrderController::class, 'store'])->name('order.store');
 
 
     // Suppliers and Locations for users
@@ -79,6 +84,16 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('suppliers', SupplierController::class);
 
     Route::get('admin/sales', [SalesController::class, 'adminIndex'])->name('admin.sales.index');
+
+    // Export Routes for Reports
+    Route::get('admin/reports', function () {
+        return view('admin.reports');
+    })->name('admin.reports');
+
+    Route::get('reports/users', [ReportsController::class, 'exportUsers'])->name('reports.users');
+    Route::get('reports/products', [ReportsController::class, 'exportProducts'])->name('reports.products');
+    Route::get('reports/suppliers', [ReportsController::class, 'exportSuppliers'])->name('reports.suppliers');
+    Route::get('reports/sales', [ReportsController::class, 'exportSales'])->name('reports.sales');
 });
 
 // Profile Routes

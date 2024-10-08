@@ -29,9 +29,7 @@
                                         <i class="bi bi-box"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> 
-                                        <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <h6>{{ $totalProducts }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -48,9 +46,7 @@
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>32</h6>
-                                        <span class="text-success small pt-1 fw-bold">5%</span> 
-                                        <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <h6>{{ $totalSuppliers }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -67,9 +63,7 @@
                                         <i class="bi bi-geo-alt"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>12</h6>
-                                        <span class="text-success small pt-1 fw-bold">3%</span> 
-                                        <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <h6>{{ $totalLocations }}</h6>
                                     </div>
                                 </div>
                             </div>

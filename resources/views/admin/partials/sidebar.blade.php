@@ -87,6 +87,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.reports') }}">
+                <i class="bi bi-file-earmark-text"></i> <!-- Optional icon -->
+                <span>Reports</span>
+            </a>
+        </li>
+
         <!-- Add other links similarly -->
     </ul>
 </aside>
