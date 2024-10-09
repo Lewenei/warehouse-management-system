@@ -8,6 +8,7 @@ This is a MKU IT project. It is a Warehouse Management System for Khetias Draper
 - Manage products (CRUD)
 - Manage suppliers (CRUD)
 - Admin dashboard for managing all entities
+- Admin exports CSV reports
 
 ## Requirements
 
@@ -30,7 +31,7 @@ composer install
 
 npm install
 
-npm run dev
+npm run dev ----- Run this command everytime you launch the project. 
 
 cp .env.example .env
 
@@ -73,3 +74,8 @@ Create Warehouse Locations
 Create Product
 
 Approve users
+
+
+
+Packages Used
+- Laravel Excel
