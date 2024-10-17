@@ -54,6 +54,8 @@ php artisan key:generate
 
 php artisan migrate
 
+php Storage link
+
 php artisan serve
 
 

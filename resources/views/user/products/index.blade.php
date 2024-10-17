@@ -41,7 +41,6 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Description</th>
                                     <th>Quantity</th>
                                     <th>Product Type</th>
                                     <th>Warehouse Location</th>
@@ -52,16 +51,15 @@
                                 @foreach($products as $product)
                                 <tr>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ $product->description }}</td>
                                     <td>{{ $product->quantity }}</td>
                                     <td>{{ $product->productType->name }}</td>
                                     <td>{{ $product->warehouseLocation->location_name }}</td>
                                     <td>
                                         
-                                    <a href="{{ route('user.products.edit', $product) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="{{ route('user.products.edit', $product) }}" class="btn btn-warning"><i class="bi bi-pen"></i></a>
                                     <!-- View Product Button -->
-                                    <a href="{{ route('user.products.show', $product->id) }}" class="btn btn-sm btn-info">View</a>
-                                    <a href="{{ route('user.sales.create', $product->id) }}" class="btn btn-sm btn-primary">Outgoing Goods</a>
+                                    <a href="{{ route('user.products.show', $product->id) }}" class="btn btn-info"><i class="bi bi-eye"></i></a>
+                                    <a href="{{ route('user.sales.create', $product->id) }}" class="btn btn-primary"><i class="bi bi-cart-check"></i></a>
                                 </td>
                                 </tr>
                                 @endforeach
