@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\CustomerAuthController;
+use App\Http\Controllers\CustomerDashboardController;
 
 //Export Routes
 use App\Exports\UsersExport;
@@ -102,6 +104,25 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+// Customer Routes
+Route::get('/customer/register', [CustomerAuthController::class, 'showRegisterForm'])->name('customer.register');
+Route::post('/customer/register', [CustomerAuthController::class, 'register']);
+Route::get('/customer/login', [CustomerAuthController::class, 'showLoginForm'])->name('customer.login');
+Route::post('/customer/login', [CustomerAuthController::class, 'login']);
+Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
+
+Route::get('/customer/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
+// Customer order routes
+Route::get('/customer/products', [CustomerDashboardController::class, 'index'])->name('customer.products'); // Show all products
+Route::get('/customer/products/{product}/order', [OrderController::class, 'create'])->name('customer.order.create'); // Order form
+Route::post('/customer/products/{product}/order', [OrderController::class, 'store'])->name('customer.order.store'); // Handle order submission
+
+// Add this route to your web.php
+Route::get('/customer/orders', [OrderController::class, 'index'])->name('customer.orders'); // Ensure only authenticated customers can access this
+
+
 
 // Authentication Routes
 require __DIR__ . '/auth.php';

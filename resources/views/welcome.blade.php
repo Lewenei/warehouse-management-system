@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,7 +85,8 @@
             border-radius: 5px;
             text-decoration: none;
             transition: background 0.3s;
-            margin: 0 10px; /* Add horizontal spacing */
+            margin: 0 10px;
+            /* Add horizontal spacing */
         }
 
         .btn:hover {
@@ -102,7 +104,8 @@
         }
 
         .logo {
-            max-width: 100px; /* Adjust as needed */
+            max-width: 100px;
+            /* Adjust as needed */
             margin-bottom: 10px;
         }
 
@@ -113,42 +116,49 @@
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <img src="{{ asset('assets/img/kdlLogo.png') }}" alt="Khetia Drapers Limited Logo" class="logo">
-    <h1>Khetia Drapers Limited</h1>
-</header>
+    <header>
+        <img src="{{ asset('assets/img/kdlLogo.png') }}" alt="Khetia Drapers Limited Logo" class="logo">
+        <h1>Khetia Drapers Limited</h1>
+    </header>
 
-<div class="container">
-    <h2 class="section-title">Welcome to Khetia Drapers Limited</h2>
-    <div class="section">
-        <p>
-            Khetia Drapers Limited is a fast-growing company registered in rendering services and products to its clients from diversified regions.
-        </p>
-        <h3>Our Services</h3>
-        <p>
-            To our Customers, we offer you Retail services of a wide range of products such as; Entertainment and Electronic equipments, Fresh & Groceries food, Home-Care & Detergents, Beauty and Clothe-Wares, Stationeries, Furniture, Hardware and Machineries, Households, Agricultural inputs and Foot-Wares from both local and foreign manufacturers.
-        </p>
-    </div>
+    <div class="container">
+        <h2 class="section-title">Welcome to Khetia Drapers Limited</h2>
+        <div class="section">
+            <p>
+                Khetia Drapers Limited is a fast-growing company registered in rendering services and products to its clients from diversified regions.
+            </p>
+            <h3>Our Services</h3>
+            <p>
+                To our Customers, we offer you Retail services of a wide range of products such as; Entertainment and Electronic equipments, Fresh & Groceries food, Home-Care & Detergents, Beauty and Clothe-Wares, Stationeries, Furniture, Hardware and Machineries, Households, Agricultural inputs and Foot-Wares from both local and foreign manufacturers.
+            </p>
+            <div class="auth-buttons">
+                <a href="{{ route('customer.login') }}" class="btn btn-primary btn-lg mx-2">Customer Login</a>
+                <a href="{{ route('customer.register') }}" class="btn btn-secondary btn-lg mx-2">Customer Register</a>
+            </div>
+        </div>
 
-    <div class="auth-buttons">
-        @if (Route::has('login'))
+
+        <div class="auth-buttons">
+            @if (Route::has('login'))
             @auth
-                <a href="{{ url('/dashboard') }}" class="btn">Dashboard</a>
+            <a href="{{ url('/dashboard') }}" class="btn">Dashboard</a>
             @else
-                <a href="{{ route('login') }}" class="btn">Log in</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="btn">Register</a>
-                @endif
+            <a href="{{ route('login') }}" class="btn">Log in</a>
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}" class="btn">Register</a>
+            @endif
             @endauth
-        @endif
+            @endif
+        </div>
     </div>
-</div>
 
-<footer>
-    &copy; {{ date('Y') }} Khetia Drapers Limited. All rights reserved.
-</footer>
+    <footer>
+        &copy; {{ date('Y') }} Khetia Drapers Limited. All rights reserved.
+    </footer>
 
 </body>
+
 </html>

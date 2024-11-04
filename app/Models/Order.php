@@ -10,16 +10,23 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'customer_id',
         'product_id',
         'quantity',
+        'total_price',
         'order_date',
-        'customer_name',
-        'customer_email',
-        'customer_phone',
     ];
 
     /**
-     * Each order belongs to a product.
+     * Define a relationship to the Customer model.
+     */
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    /**
+     * Define a relationship to the Product model.
      */
     public function product()
     {

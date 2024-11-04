@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        //Definition of Auth Guard
+        'customer' => [
+        'driver' => 'session',
+        'provider' => 'customers',
+    ],
     ],
 
     /*
@@ -64,6 +69,10 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
+        'customers' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Customer::class,
+    ],
 
         // 'users' => [
         //     'driver' => 'database',

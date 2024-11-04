@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Customer;
 
 class ProductController extends Controller
 {
@@ -18,11 +19,12 @@ class ProductController extends Controller
     {
         $products = Product::with('productType', 'warehouseLocation')->get();
 
-        // Return different views based on the user role
-        if (Auth::user()->role == 'admin') {
+        // Check the user role and return the appropriate view
+         // Return views based on the user's role
+         if (Auth::user()->role == 'admin') {
             return view('admin.products.index', compact('products'));
         } else {
-            return view('user.products.index', compact('products')); // Change this to user view
+            return view('user.products.index', compact('products')); // Adjust this as needed
         }
     }
 
@@ -198,23 +200,28 @@ class ProductController extends Controller
     }
 
     // ProductController.php
+// Sell a product to a customer
 public function sellProduct(Request $request, Product $product)
 {
     $request->validate([
         'quantity' => 'required|integer|min:1|max:' . $product->quantity,
+        'customer_id' => 'required|exists:customers,id', // Validate the customer ID
         'customer_name' => 'required|string|max:255',
         'customer_email' => 'required|email',
         'customer_phone' => 'required|string|max:20',
     ]);
 
-    // Create the sale record with user_id
+    // Fetch the customer based on the provided customer ID
+    $customer = Customer::findOrFail($request->customer_id);
+
+    // Create the sale record with user_id and customer information
     Sale::create([
         'product_id' => $product->id,
         'user_id' => Auth::id(),  // Store the authenticated user's ID
         'quantity' => $request->quantity,
-        'customer_name' => $request->customer_name,
-        'customer_email' => $request->customer_email,
-        'customer_phone' => $request->customer_phone,
+        'customer_name' => $customer->name,
+        'customer_email' => $customer->email,
+        'customer_phone' => $customer->phone,
     ]);
 
     // Reduce the product quantity
