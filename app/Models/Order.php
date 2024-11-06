@@ -15,6 +15,7 @@ class Order extends Model
         'quantity',
         'total_price',
         'order_date',
+        'status',
     ];
 
     /**

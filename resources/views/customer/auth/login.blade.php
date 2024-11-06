@@ -1,4 +1,4 @@
-@extends('layouts.customer-layout')
+@extends('layouts.guestcustomer')
 
 <main>
     <div class="container">

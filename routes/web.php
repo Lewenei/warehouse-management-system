@@ -77,6 +77,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/products/{product}', [ProductController::class, 'show'])->name('admin.products.show');
 
     Route::get('admin/warehouse/{warehouse}/products', [ProductController::class, 'getProductsByWarehouse'])->name('admin.products.byWarehouse');
+    // Order Routes
+    Route::get('/admin/orders', [AdminController::class, 'viewOrders'])->name('admin.viewOrders');
+    Route::post('/admin/orders/{id}/update-status', [AdminController::class, 'updateOrderStatus'])->name('admin.orders.updateStatus');
+
 
 
 

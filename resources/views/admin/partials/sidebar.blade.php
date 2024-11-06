@@ -94,6 +94,14 @@
             </a>
         </li>
 
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.viewOrders') }}">
+                <i class="bi bi-file-earmark-text"></i> <!-- Optional icon -->
+                <span>Orders</span>
+            </a>
+        </li>
+
         <!-- Add other links similarly -->
     </ul>
 </aside>

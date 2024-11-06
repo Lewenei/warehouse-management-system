@@ -9,6 +9,7 @@
             @csrf
             <div class="mb-3">
                 <label for="quantity" class="form-label">Quantity</label>
+                <p>Available Quantity: {{ $product->quantity }}</p>
                 <input type="number" name="quantity" class="form-control" id="quantity" required min="1" max="{{ $product->quantity }}">
                 @error('quantity')
                     <div class="alert alert-danger">{{ $message }}</div>

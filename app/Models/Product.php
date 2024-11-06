@@ -52,4 +52,12 @@ class Product extends Model
     {
         return $this->hasMany(Sale::class);
     }
+    
+    public function dashboard()
+    {
+        // Fetch all products and group them by type
+        $products = Product::all()->groupBy('type');
+
+        return view('customer.dashboard', compact('products'));
+    }
 }
