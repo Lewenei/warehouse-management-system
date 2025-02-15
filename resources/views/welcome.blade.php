@@ -156,7 +156,7 @@
     </div>
 
     <footer>
-        &copy; {{ date('Y') }} Khetia Drapers Limited. All rights reserved.
+        &copy; {{ date('Y') }} Our Organization. All rights reserved.
     </footer>
 
 </body>
