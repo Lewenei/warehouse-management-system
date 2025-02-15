@@ -1,6 +1,7 @@
 # Warehouse Management System
 
 This is an Open Source Warehouse Management System built using **Laravel 11**. The system allows companies/supermarkets, and organizations to manage warehouse locations, products, suppliers, and more. 
+![Main Admin Dashboard](image-1.png)
 
 Customers can also register and login, and place orders for various available products. 
 
@@ -18,6 +19,8 @@ Customers can also register and login, and place orders for various available pr
 - Composer
 - Node.js and npm
 - MySQL or any other supported database
+
+![Product Registration](image-2.png)
 
 ## Getting Started
 
@@ -83,3 +86,5 @@ Approve users
 
 Packages Used
 - Laravel Excel
+
+![Customer Dashboard](image.png)
