@@ -24,7 +24,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                <img src="{{ asset('assets/img/kdlLogo.png') }}" alt="Khetia Drapers Limited Logo" class="logo">
+                <img src="{{ asset('assets/img/kdlLogo.png') }}" alt="Our Organization Logo" class="logo">
                 </a>
             </div>
 

@@ -34,7 +34,7 @@
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('admin.index') }}" class="logo d-flex align-items-center">
                 <img src="{{ asset('assets/img/logo.png') }}" alt="">
-                <span class="d-none d-lg-block">Khetias Drapers</span>
+                <span class="d-none d-lg-block">Our Organization</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -50,7 +50,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{ Auth::user()->name }}</h6>
-                        <span>{{ Auth::user()->role }}</span> <!-- Adjust role or title as needed -->
+                        <span>{{ Auth::user()->role }}</span> 
                     </li>
                     <li>
                         <hr class="dropdown-divider">

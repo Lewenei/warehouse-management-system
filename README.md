@@ -1,6 +1,8 @@
 # Warehouse Management System
 
-This is a MKU IT project. It is a Warehouse Management System for Khetias Drapers  built using **Laravel 11**. The system allows administrators to manage warehouse locations, products, suppliers, and more. 
+This is an Open Source Warehouse Management System built using **Laravel 11**. The system allows companies/supermarkets, and organizations to manage warehouse locations, products, suppliers, and more. 
+
+Customers can also register and login, and place orders for various available products. 
 
 ## Features
 

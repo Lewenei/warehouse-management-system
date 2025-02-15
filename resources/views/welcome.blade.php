@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khetia Drapers Limited</title>
+    <title>Our Organization</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -121,14 +121,14 @@
 
     <header>
         <img src="{{ asset('assets/img/kdlLogo.png') }}" alt="Khetia Drapers Limited Logo" class="logo">
-        <h1>Khetia Drapers Limited</h1>
+        <h1>Your Organization Name</h1>
     </header>
 
     <div class="container">
-        <h2 class="section-title">Welcome to Khetia Drapers Limited</h2>
+        <h2 class="section-title">Welcome to Our Organization</h2>
         <div class="section">
             <p>
-                Khetia Drapers Limited is a fast-growing company registered in rendering services and products to its clients from diversified regions.
+                Our Organization is a fast-growing company registered in rendering services and products to its clients from diversified regions.
             </p>
             <h3>Our Services</h3>
             <p>
